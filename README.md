@@ -41,7 +41,7 @@ All other response classes will inherit from it and specify the type of the `TMe
 public class DogBreedListResponse : DogBreedResponse<IEnumerable<string>>
 { }
 
-	public class DogBreedRandomImageResponse : DogBreedResponse<string>
+public class DogBreedRandomImageResponse : DogBreedResponse<string>
 { }
 ```
 
