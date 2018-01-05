@@ -9,7 +9,7 @@ namespace DogDirectory.Services
     public class DogBreedService : IDogBreedService, IDisposable
     {
         HttpClient _http;
-        private const string SvcUrl = "https://dog.ceo/api";
+        private const string SvcUrl = "https://dog.ceo";
         public DogBreedService()
         {
             _http = new HttpClient { BaseAddress = new Uri(SvcUrl) };
@@ -21,7 +21,7 @@ namespace DogDirectory.Services
 
         public async Task<IEnumerable<string>> GetBreedsAsync()
         {
-            var response = await _http.GetAsAsync<DogBreedListResponse>("breeds/list");
+            var response = await _http.GetAsAsync<DogBreedListResponse>("/api/breeds/list");
             if (response.IsSuccess)
             {
                 return response.Message;
@@ -31,7 +31,7 @@ namespace DogDirectory.Services
 
         public async Task<string> GetRandomImage(string breed)
         {
-            var response = await _http.GetAsAsync<DogBreedRandomImageResponse>($"breed/{breed}/images/random");
+            var response = await _http.GetAsAsync<DogBreedRandomImageResponse>($"/api/breed/{breed}/images/random");
             if (response.IsSuccess)
             {
                 return response.Message;

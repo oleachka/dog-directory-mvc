@@ -9,7 +9,7 @@ namespace DogDirectory.Services
         public static async Task<T> GetAsAsync<T>(this HttpClient http, string url)
         {
             var resp = await http.GetStringAsync(url);
-            return JsonConvert.DeserializeObject<T>(url);
+            return JsonConvert.DeserializeObject<T>(resp);
         }
     }
 }

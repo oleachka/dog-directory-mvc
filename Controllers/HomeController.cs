@@ -5,28 +5,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DogDirectory.Models;
+using DogDirectory.Services;
 
 namespace DogDirectory.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IDogBreedService _dogBreedSvc;
+
+        public HomeController(IDogBreedService dogBreedSvc)
         {
-            return View();
+            this._dogBreedSvc = dogBreedSvc;
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
 
-            return View();
+        public async Task<IActionResult> Index()
+        {
+            var model = await _dogBreedSvc.GetBreedsAsync();
+            return View(model);
         }
 
-        public IActionResult Contact()
+        public async Task<IActionResult> Details(string id)
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var url = await _dogBreedSvc.GetRandomImage(id);
+            return View(new DogBreedImage { Breed = id, ImageUrl = url } );
         }
 
         public IActionResult Error()

@@ -1,0 +1,17 @@
+﻿@model DogBreedImage
+@{
+    ViewData["Title"] = "Random Image";
+}
+<p></p>
+
+<h1>
+    @Model.Breed
+</h1>
+
+<div class="text-center">
+    <img src="@Model.ImageUrl" class="img-fluid" alt="Random image for @Model.Breed">
+</div>
+<div class="text-center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
