@@ -6,7 +6,7 @@ namespace DogDirectory.Services
 {
     public interface IDogBreedService
     {
-        Task<IEnumerable<DogBreedListResponse>> GetBreedsAsync();
+        Task<IEnumerable<string>> GetBreedsAsync();
         Task<string> GetRandomImage(string breed);
     }
 }

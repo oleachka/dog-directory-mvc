@@ -1,17 +1,15 @@
 ﻿using DogDirectory.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace DogDirectory.Services
 {
-
     public class DogBreedService : IDogBreedService, IDisposable
     {
         HttpClient _http;
-        private const string SvcUrl = "";
+        private const string SvcUrl = "https://dog.ceo/api";
         public DogBreedService()
         {
             _http = new HttpClient { BaseAddress = new Uri(SvcUrl) };
@@ -21,14 +19,24 @@ namespace DogDirectory.Services
             _http.Dispose();
         }
 
-        public Task<IEnumerable<DogBreedListResponse>> GetBreedsAsync()
+        public async Task<IEnumerable<string>> GetBreedsAsync()
         {
-            throw new NotImplementedException();
+            var response = await _http.GetAsAsync<DogBreedListResponse>("breeds/list");
+            if (response.IsSuccess)
+            {
+                return response.Message;
+            }
+            throw new DogBreedServiceException("failed to retrieve dogbreeds");
         }
 
-        public Task<string> GetRandomImage(string breed)
+        public async Task<string> GetRandomImage(string breed)
         {
-            throw new NotImplementedException();
+            var response = await _http.GetAsAsync<DogBreedRandomImageResponse>($"breed/{breed}/images/random");
+            if (response.IsSuccess)
+            {
+                return response.Message;
+            }
+            throw new DogBreedServiceException("failed to retrieve dogbreeds");
         }
     }
 }

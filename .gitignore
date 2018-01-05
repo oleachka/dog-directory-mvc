@@ -34,3 +34,5 @@
 \.vs/dog-directory-mvc/v15/
 
 obj/
+
+bin/
