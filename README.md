@@ -37,7 +37,7 @@ public abstract class DogBreedResponse<TMessage>
 All other response classes will inherit from it and specify the type of the `TMessage` generic. An example is the
 `DogListBreedResponse` class and the `DogBreedRandomImageResponse` class
 
-```
+```c#
 public class DogBreedListResponse : DogBreedResponse<IEnumerable<string>>
 { }
 
