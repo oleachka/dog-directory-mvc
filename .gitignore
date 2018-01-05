@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+\.vs/dog-directory-mvc/v15/
+
+obj/
